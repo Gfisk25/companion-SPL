@@ -1,7 +1,6 @@
 module.exports = function (self) {
 	self.setVariableDefinitions([
-		{ variableId: 'variable1', name: 'My first variable' },
-		{ variableId: 'variable2', name: 'My second variable' },
-		{ variableId: 'variable3', name: 'Another variable' },
+		{ variableId: 'current_leq', name: 'Current Leq Value' },
+		{ variableId: 'connection_status', name: 'SMAART Connection Status' },
 	])
 }

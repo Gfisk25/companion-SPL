@@ -2,31 +2,27 @@ const { combineRgb } = require('@companion-module/base')
 
 module.exports = async function (self) {
 	self.setFeedbackDefinitions({
-		ChannelState: {
-			name: 'Example Feedback',
+		leqThreshold: {
+			name: 'Leq Threshold',
 			type: 'boolean',
-			label: 'Channel State',
+			label: 'Leq Above Threshold',
 			defaultStyle: {
 				bgcolor: combineRgb(255, 0, 0),
-				color: combineRgb(0, 0, 0),
+				color: combineRgb(255, 255, 255),
 			},
 			options: [
 				{
-					id: 'num',
+					id: 'threshold',
 					type: 'number',
-					label: 'Test',
-					default: 5,
+					label: 'Threshold (dBA)',
+					default: 85,
 					min: 0,
-					max: 10,
+					max: 140,
 				},
 			],
 			callback: (feedback) => {
-				console.log('Hello world!', feedback.options.num)
-				if (feedback.options.num > 5) {
-					return true
-				} else {
-					return false
-				}
+				const currentLeq = parseFloat(self.getVariableValue('current_leq'))
+				return currentLeq > feedback.options.threshold
 			},
 		},
 	})

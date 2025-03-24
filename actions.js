@@ -1,19 +1,39 @@
 module.exports = function (self) {
 	self.setActionDefinitions({
-		sample_action: {
-			name: 'My First Action',
+		reconnect: {
+			name: 'Reconnect to SMAART',
+			options: [],
+			callback: async () => {
+				self.initConnection()
+			},
+		},
+		changeLeqWindow: {
+			name: 'Change Leq Time Window',
 			options: [
 				{
-					id: 'num',
-					type: 'number',
-					label: 'Test',
-					default: 5,
-					min: 0,
-					max: 100,
+					id: 'window',
+					type: 'dropdown',
+					label: 'Time Window',
+					choices: [
+						{ id: '1s', label: '1 Second' },
+						{ id: '5s', label: '5 Seconds' },
+						{ id: '10s', label: '10 Seconds' },
+					],
+					default: '1s',
 				},
 			],
 			callback: async (event) => {
-				console.log('Hello world!', event.options.num)
+				if (self.connected) {
+					const message = {
+						command: 'configure',
+						type: 'measurement',
+						data: {
+							metric: 'leq',
+							window: event.options.window
+						}
+					}
+					self.ws.send(JSON.stringify(message))
+				}
 			},
 		},
 	})
