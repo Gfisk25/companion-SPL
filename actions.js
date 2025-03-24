@@ -4,7 +4,7 @@ module.exports = function (self) {
 			name: 'Reconnect to SMAART',
 			options: [],
 			callback: async () => {
-				self.initConnection()
+				self._initConnection()
 			},
 		},
 		changeLeqWindow: {
@@ -17,23 +17,38 @@ module.exports = function (self) {
 					choices: [
 						{ id: '1s', label: '1 Second' },
 						{ id: '5s', label: '5 Seconds' },
-						{ id: '10s', label: '10 Seconds' },
+						{ id: '15s', label: '15 Seconds' },
+						{ id: '30s', label: '30 Seconds' },
+						{ id: '1m', label: '1 Minute' }
 					],
 					default: '1s',
 				},
 			],
 			callback: async (event) => {
 				if (self.connected) {
-					const message = {
-						command: 'configure',
-						type: 'measurement',
-						data: {
-							metric: 'leq',
-							window: event.options.window
-						}
-					}
-					self.ws.send(JSON.stringify(message))
+					self.config.leqWindow = event.options.window
+					self.setVariableValues({
+						'current_window': event.options.window
+					})
+					self._subscribeMeasurements()
 				}
+			},
+		},
+		startMonitoring: {
+			name: 'Start Monitoring',
+			options: [],
+			callback: async () => {
+				if (self.connected) {
+					self._subscribeMeasurements()
+					self.startPolling()
+				}
+			},
+		},
+		stopMonitoring: {
+			name: 'Stop Monitoring',
+			options: [],
+			callback: async () => {
+				self.stopPolling()
 			},
 		},
 	})

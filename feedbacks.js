@@ -25,5 +25,18 @@ module.exports = async function (self) {
 				return currentLeq > feedback.options.threshold
 			},
 		},
+		connectionStatus: {
+			name: 'Connection Status',
+			type: 'boolean',
+			label: 'Show when connected',
+			defaultStyle: {
+				bgcolor: combineRgb(0, 255, 0),
+				color: combineRgb(0, 0, 0),
+			},
+			options: [],
+			callback: () => {
+				return self.connected
+			},
+		},
 	})
 }

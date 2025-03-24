@@ -14,41 +14,48 @@ A Bitfocus Companion module that integrates with SMAART's API to display real-ti
 1. Connect to SMAART API
    - Establish and maintain WebSocket connection
    - Handle connection status and reconnection
-   - Authenticate if required by the API
+   - Automatic reconnection on disconnection
 
 2. Data Polling
    - Poll SMAART API for Leq measurements
-   - Configure polling interval (default: 500ms)
+   - Fixed polling interval (500ms)
    - Handle data parsing and validation
 
 3. Button Display
    - Show current Leq value
    - Update button text dynamically
-   - Optional: Color coding based on Leq thresholds
+   - Color coding based on Leq thresholds
 
 ### Module Configuration
 1. Connection Settings
    - SMAART API endpoint/IP address
-   - Port number
-   - Authentication credentials (if required)
+   - Port number (default: 9000)
 
 2. Display Options
-   - Update frequency
-   - Decimal precision
-   - Warning thresholds (optional)
-   - Button styling preferences
-   - Leq time window selection
+   - Leq time window selection (1s, 5s, 15s, 30s, 1m)
 
 ### Actions
 1. Start/Stop Monitoring
 2. Reset Connection
-3. Change Measurement Source
-4. Adjust Leq Time Window
+3. Adjust Leq Time Window
 
 ### Feedbacks
-1. Connection Status
+1. Connection Status (green when connected)
 2. Leq Value Display
-3. Threshold Warnings (optional)
+3. Threshold Warnings (red when above threshold)
+
+### Variables
+1. Current Leq Value
+2. Connection Status
+3. Current Leq Time Window
+
+### Code Structure
+1. Follow Companion Module Template Structure
+   - Maintain standard class structure
+   - Use template initialization patterns
+   - Follow template configuration patterns
+   - Implement standard lifecycle methods
+   - Use template logging patterns
 
 ## User Interface
 1. Button Display Format:
@@ -57,13 +64,12 @@ A Bitfocus Companion module that integrates with SMAART's API to display real-ti
    XX.X dBA
    ```
 2. Configuration Panel:
-   - Connection settings
-   - Display preferences
+   - Connection settings (IP, Port)
+   - Leq time window selection
    - Threshold settings
-   - Leq time window settings
 
 ## Error Handling
-1. Connection failure recovery
+1. Connection failure recovery (automatic reconnection after 5 seconds)
 2. Invalid data handling
 3. User-friendly error messages
 
@@ -80,11 +86,14 @@ A Bitfocus Companion module that integrates with SMAART's API to display real-ti
 4. Custom alert thresholds
 5. Graph visualization options
 6. Multiple Leq time windows simultaneously
+7. Authentication support if required by SMAART
+8. Customizable update frequency
+9. Button styling preferences
 
 ## Dependencies
 1. Bitfocus Companion SDK
 2. SMAART API access
-3. WebSocket support
+3. WebSocket support (ws package)
 4. Node.js runtime
 
 ## Delivery Timeline

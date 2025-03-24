@@ -1,12 +1,12 @@
 {
-	"id": "companion-module-smaart",
-	"name": "companion-module-smaart",
-	"shortname": "companion-module-smaart",
-	"description": "companion-module-smaart",
+	"id": "companion-module-spl",
+	"name": "Greg SPL Meter",
+	"shortname": "spl",
+	"description": "SPL Meter module for Companion",
 	"version": "0.0.0",
 	"license": "MIT",
-	"repository": "git+https://github.com/bitfocus/companion-module-smaart.git",
-	"bugs": "https://github.com/bitfocus/companion-module-smaart/issues",
+	"repository": "git+https://github.com/bitfocus/companion-module-spl.git",
+	"bugs": "https://github.com/bitfocus/companion-module-spl/issues",
 	"maintainers": [],
 	"legacyIds": [],
 	"runtime": {
@@ -17,5 +17,5 @@
 	},
 	"manufacturer": "Rational Acoustics",
 	"products": ["SMAART"],
-	"keywords": ["audio", "measurement", "smaart"]
+	"keywords": ["audio", "measurement", "smaart","SPL"]
 }
